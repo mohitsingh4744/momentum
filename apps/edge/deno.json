@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": ["deno.window"],
+    "strict": true
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.208.0/"
+  },
+  "tasks": {
+    "test": "deno test --allow-all"
+  }
+} 

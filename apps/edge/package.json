@@ -1,0 +1,14 @@
+{
+  "name": "@momentum/edge",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "supabase functions serve",
+    "build": "supabase functions build",
+    "deploy": "supabase functions deploy",
+    "test": "deno test --allow-all"
+  },
+  "devDependencies": {
+    "supabase": "^1.0.0"
+  }
+} 
