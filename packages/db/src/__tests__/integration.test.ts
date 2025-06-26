@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import { execSync } from 'child_process'
 import { describe, it, expect, beforeAll } from 'vitest'
 
 const SUPABASE_URL = 'http://localhost:54321'
@@ -11,8 +10,8 @@ describe('Supabase DB Integration', () => {
   let userBId: string
 
   beforeAll(async () => {
-    // Run migration before tests
-    execSync('supabase db reset', { stdio: 'inherit' })
+    // Wait a moment for database to be ready (pre-check script handles setup)
+    await new Promise(resolve => setTimeout(resolve, 2000))
     
     // Create two test users using service role
     const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)

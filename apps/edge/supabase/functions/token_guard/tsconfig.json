@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "types": [],
+    "strict": true
+  },
+  "exclude": ["node_modules", "**/node_modules", "**/*.test.tsx"]
+} 

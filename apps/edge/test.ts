@@ -1,5 +1,4 @@
-// @deno-types="https://deno.land/std@0.208.0/assert/mod.d.ts"
-import { assertEquals } from "std/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.208.0/assert/mod.ts";
 
 Deno.test("Hello World Test", () => {
   assertEquals("hello world", "hello world");

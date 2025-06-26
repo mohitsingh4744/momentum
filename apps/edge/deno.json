@@ -9,5 +9,7 @@
   },
   "tasks": {
     "test": "deno test --allow-all"
-  }
+  },
+  "exclude": ["node_modules", "**/node_modules", "../../**/node_modules", "**/*.test.tsx"],
+  "nodeModulesDir": "auto"
 } 

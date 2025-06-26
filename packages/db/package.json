@@ -6,13 +6,17 @@
     "generate": "supabase gen types typescript --local > src/types.ts",
     "migrate": "supabase db reset --local",
     "test": "vitest run",
-    "db:migrate:dev": "supabase db reset"
+    "db:migrate:dev": "supabase db reset",
+    "lint": "eslint src --ext .ts,.tsx",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.42.6"
   },
   "devDependencies": {
+    "eslint": "^8.0.0",
     "supabase": "^1.0.0",
+    "typescript": "^5.0.0",
     "vitest": "^1.0.0"
   }
-} 
+}

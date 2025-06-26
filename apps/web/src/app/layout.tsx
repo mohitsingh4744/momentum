@@ -1,4 +1,6 @@
+import React from 'react';
 import type { Metadata } from 'next'
+import { TRPCProvider } from '@/lib/trpc/provider'
 
 export const metadata: Metadata = {
   title: 'Momentum',
@@ -12,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <TRPCProvider>
+          {children}
+        </TRPCProvider>
+      </body>
     </html>
   )
 } 

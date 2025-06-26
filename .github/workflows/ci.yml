@@ -10,6 +10,20 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v4
 
@@ -22,6 +36,11 @@ jobs:
       uses: pnpm/action-setup@v2
       with:
         version: 8
+
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.40.0
 
     - name: Get pnpm store directory
       shell: bash
@@ -46,4 +65,12 @@ jobs:
       run: pnpm type-check
 
     - name: Run tests
-      run: pnpm test 
+      run: pnpm test
+
+    - name: Test edge functions
+      run: |
+        cd apps/edge
+        pnpm test:functions
+      env:
+        SUPABASE_URL: http://127.0.0.1:54321
+        SUPABASE_SERVICE_ROLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU 

@@ -1,24 +1,34 @@
 {
-  "name": "momentum",
+  "name": "momentum-1",
   "version": "1.0.0",
   "description": "Goal-oriented coaching platform",
   "private": true,
   "scripts": {
+    "precheck": "node scripts/simple-precheck.js",
+    "lint": "npm run precheck && pnpm -r lint",
+    "test": "npm run precheck && pnpm -r test",
+    "test:watch": "npm run precheck && pnpm -r test:watch",
     "build": "pnpm -r build",
     "dev": "pnpm -r dev",
-    "lint": "pnpm -r lint",
-    "type-check": "pnpm -r type-check",
-    "test": "pnpm -r test"
+    "clean": "pnpm -r clean",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:reset": "supabase db reset",
+    "db:test": "cd packages/db && pnpm test",
+    "web:test": "cd apps/web && pnpm test",
+    "edge:test": "cd apps/edge && deno test --allow-all"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.0.0",
-    "eslint-config-next": "^14.0.0",
-    "typescript": "^5.0.0"
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"
   }
-} 
+}

@@ -4,23 +4,13 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  root: true,
-  ignorePatterns: [
-    'node_modules/',
-    '.next/',
-    'dist/',
-    'build/',
-    'coverage/',
-    '*.config.js',
-    '*.config.ts'
-  ],
-  env: {
-    node: true,
-    es2022: true,
-  },
   parserOptions: {
     ecmaVersion: 2022,
     sourceType: 'module',
+  },
+  env: {
+    node: true,
+    es2022: true,
   },
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
