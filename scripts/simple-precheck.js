@@ -24,27 +24,35 @@ try {
   process.exit(1);
 }
 
-// Stop any running Supabase instances to avoid conflicts
+// Check if Supabase is already running
 try {
-  console.log('🛑 Stopping any running Supabase instances...');
-  execSync('supabase stop', { stdio: 'ignore' });
-  console.log('✅ Stopped existing Supabase instances');
+  const status = execSync('supabase status', { encoding: 'utf8' });
+  if (status.includes('supabase local development setup is running')) {
+    console.log('✅ Supabase is already running');
+  } else {
+    // Start Supabase if not running
+    console.log('🚀 Starting Supabase...');
+    execSync('supabase start', { stdio: 'ignore' });
+    console.log('✅ Supabase is running');
+    
+    // Wait a moment for containers to stabilize
+    console.log('⏳ Waiting for containers to stabilize...');
+    execSync('sleep 3', { stdio: 'ignore' });
+  }
 } catch (error) {
-  console.log('⚠️  No running Supabase instances to stop');
-}
-
-// Start Supabase fresh
-try {
-  console.log('🚀 Starting Supabase...');
-  execSync('supabase start', { stdio: 'ignore' });
-  console.log('✅ Supabase is running');
-  
-  // Wait a moment for containers to stabilize
-  console.log('⏳ Waiting for containers to stabilize...');
-  execSync('sleep 3', { stdio: 'ignore' });
-} catch (error) {
-  console.error('❌ Failed to start Supabase:', error.message);
-  process.exit(1);
+  // If status check fails, try to start Supabase
+  try {
+    console.log('🚀 Starting Supabase...');
+    execSync('supabase start', { stdio: 'ignore' });
+    console.log('✅ Supabase is running');
+    
+    // Wait a moment for containers to stabilize
+    console.log('⏳ Waiting for containers to stabilize...');
+    execSync('sleep 3', { stdio: 'ignore' });
+  } catch (startError) {
+    console.error('❌ Failed to start Supabase:', startError.message);
+    process.exit(1);
+  }
 }
 
 // Check dependencies
